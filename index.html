@@ -36,21 +36,22 @@
   function gentFont (dom,fontName) {
     //随机字体名
     var fontFamily = `${Math.random()}`.replace('0.', 'font_family_');
-    const text = Array.from(new Set(dom.textContent))
-                      .sort()
-                      .join();
+    var className=`use_${fontFamily}`
+    const text =dom.textContent;
     const style = document.createElement('style');
-    style.innerHTML = `
-  @font-face {
-    font-family: ${fontFamily};
-    font-display: fallback;
-    src: url("http://localhost:8000/pdcube/ifont?font=${fontName}&text=${encodeURIComponent(
-      text
-    )}");
-  }
-`;
+    const font = new FontFace(`${fontFamily}`, `url(http://localhost:8000/pdcube/ifont?font=${fontName}&text=${encodeURIComponent(text)})`);
+    document.fonts.add(font);
+    font.load().then(()=>{
+      debugger
+      dom.classList.add(className)
+    }).catch((res)=>{
+      debugger
+    })
+    style.innerHTML=`.${className}{
+    font-family:${fontFamily};
+    }`
     document.head.appendChild(style);
-    dom.style.fontFamily = fontFamily;
+    //dom.style.fontFamily = fontFamily;
   }
 </script>
 </html>
