@@ -1,0 +1,19 @@
+{
+  "name": "syncfont",
+  "version": "1.0.0",
+  "description": "",
+  "main": "generateFont.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fontmin": "^0.9.8",
+    "koa": "^2.13.1",
+    "koa-cors": "^0.0.16",
+    "koa-router": "^10.0.0",
+    "md5": "^2.3.0",
+    "util": "^0.12.4"
+  }
+}

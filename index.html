@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .label{
+            font-size: 80px;
+        }
+    </style>
+</head>
+<body>
+<div>字体名：</div>
+<select name="" id="fontName">
+    <option value="FZBaiZHXTJW">FZBaiZHXTJW</option>
+    <option value="FZZJ-YLKSJW">FZZJ-YLKSJW</option>
+</select>
+<div id="content" class="label"></div>
+<input id="inp" type="text"/>
+<button id="btn">设置值</button>
+</body>
+<script>
+  document.domain='local.dmall.com'
+  window.onload = function () {
+    document.querySelector('#btn').addEventListener('click', setvalue)
+  }
+
+  function setvalue () {
+    var inpu = document.querySelector('#inp')
+    var content = document.querySelector('#content')
+    var fontName = document.querySelector('#fontName')
+    content.innerHTML = inpu.value;
+    gentFont(content,fontName.value)
+  }
+
+  function gentFont (dom,fontName) {
+    //随机字体名
+    var fontFamily = `${Math.random()}`.replace('0.', 'font_family_');
+    const text = Array.from(new Set(dom.textContent))
+                      .sort()
+                      .join();
+    const style = document.createElement('style');
+    style.innerHTML = `
+  @font-face {
+    font-family: ${fontFamily};
+    font-display: fallback;
+    src: url("http://localhost:8000/pdcube/ifont?font=${fontName}&text=${encodeURIComponent(
+      text
+    )}");
+  }
+`;
+    document.head.appendChild(style);
+    dom.style.fontFamily = fontFamily;
+  }
+</script>
+</html>
