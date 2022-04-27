@@ -42,10 +42,8 @@
     const font = new FontFace(`${fontFamily}`, `url(http://localhost:8000/pdcube/ifont?font=${fontName}&text=${encodeURIComponent(text)})`);
     document.fonts.add(font);
     font.load().then(()=>{
-      debugger
       dom.classList.add(className)
     }).catch((res)=>{
-      debugger
     })
     style.innerHTML=`.${className}{
     font-family:${fontFamily};
